@@ -1,0 +1,3 @@
+[submodule "MoonlightCommonInterop/moonlight-common-c"]
+	path = MoonlightCommonInterop/moonlight-common-c
+	url = https://github.com/arnath/moonlight-common-c.git
