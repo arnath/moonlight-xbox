@@ -223,27 +223,27 @@
   <PropertyGroup />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <GenerateManifest>false</GenerateManifest>
-    <IncludePath>C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\opus-1.1-static;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\enet\include;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\reedsolomon;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\src;$(IncludePath)</IncludePath>
+    <IncludePath>opus-1.1-static;moonlight-common-c\enet\include;moonlight-common-c\reedsolomon;moonlight-common-c\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <GenerateManifest>false</GenerateManifest>
-    <IncludePath>C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\opus-1.1-static;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\enet\include;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\reedsolomon;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\src;$(IncludePath)</IncludePath>
+    <IncludePath>opus-1.1-static;moonlight-common-c\enet\include;moonlight-common-c\reedsolomon;moonlight-common-c\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <GenerateManifest>false</GenerateManifest>
-    <IncludePath>C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\opus-1.1-static;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\enet\include;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\reedsolomon;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\src;$(IncludePath)</IncludePath>
+    <IncludePath>opus-1.1-static;moonlight-common-c\enet\include;moonlight-common-c\reedsolomon;moonlight-common-c\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <GenerateManifest>false</GenerateManifest>
-    <IncludePath>C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\opus-1.1-static;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\enet\include;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\reedsolomon;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\src;$(IncludePath)</IncludePath>
+    <IncludePath>opus-1.1-static;moonlight-common-c\enet\include;moonlight-common-c\reedsolomon;moonlight-common-c\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <GenerateManifest>false</GenerateManifest>
-    <IncludePath>C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\opus-1.1-static;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\enet\include;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\reedsolomon;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\src;$(IncludePath)</IncludePath>
+    <IncludePath>opus-1.1-static;moonlight-common-c\enet\include;moonlight-common-c\reedsolomon;moonlight-common-c\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <GenerateManifest>false</GenerateManifest>
-    <IncludePath>C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\opus-1.1-static;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\enet\include;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\reedsolomon;C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\moonlight-common-c\src;$(IncludePath)</IncludePath>
+    <IncludePath>opus-1.1-static;moonlight-common-c\enet\include;moonlight-common-c\reedsolomon;moonlight-common-c\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -259,7 +259,7 @@
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <AdditionalDependencies>opus.lib;celt.lib;silk_common.lib;silk_fixed.lib;silk_float.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\opus-1.1-static\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>opus-1.1-static\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>/nodefaultlib:vccorlibd /nodefaultlib:msvcrtd vccorlibd.lib msvcrtd.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -277,7 +277,7 @@
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <AdditionalDependencies>opus.lib;celt.lib;silk_common.lib;silk_fixed.lib;silk_float.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\opus-1.1-static\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>opus-1.1-static\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>/nodefaultlib:vccorlib /nodefaultlib:msvcrt vccorlib.lib msvcrt.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -295,7 +295,7 @@
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <AdditionalDependencies>opus.lib;celt.lib;silk_common.lib;silk_fixed.lib;silk_float.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\opus-1.1-static\ARM;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>opus-1.1-static\ARM;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>/nodefaultlib:vccorlibd /nodefaultlib:msvcrtd vccorlibd.lib msvcrtd.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -313,7 +313,7 @@
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <AdditionalDependencies>opus.lib;celt.lib;silk_common.lib;silk_fixed.lib;silk_float.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\opus-1.1-static\ARM;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>opus-1.1-static\ARM;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>/nodefaultlib:vccorlib /nodefaultlib:msvcrt vccorlib.lib msvcrt.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -331,7 +331,7 @@
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <AdditionalDependencies>opus.lib;celt.lib;silk_common.lib;silk_fixed.lib;silk_float.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\opus-1.1-static\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>opus-1.1-static\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>/nodefaultlib:vccorlibd /nodefaultlib:msvcrtd vccorlibd.lib msvcrtd.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -349,7 +349,7 @@
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <AdditionalDependencies>opus.lib;celt.lib;silk_common.lib;silk_fixed.lib;silk_float.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Vijay\Documents\GitHub\moonlight-uwp\MoonlightCommonInterop\opus-1.1-static\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>opus-1.1-static\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>/nodefaultlib:vccorlib /nodefaultlib:msvcrt vccorlib.lib msvcrt.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
