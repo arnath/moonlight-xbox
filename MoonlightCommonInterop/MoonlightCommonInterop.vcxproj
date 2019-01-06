@@ -120,8 +120,11 @@
     <ClCompile Include="moonlight-common-c\src\VideoStream.c">
       <CompileAsWinRT>false</CompileAsWinRT>
     </ClCompile>
+    <ClCompile Include="MoonlightCommonInterop.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IAudioRenderer.h" />
+    <ClInclude Include="IVideoRenderer.h" />
     <ClInclude Include="moonlight-common-c\enet\include\enet\callbacks.h" />
     <ClInclude Include="moonlight-common-c\enet\include\enet\enet.h" />
     <ClInclude Include="moonlight-common-c\enet\include\enet\list.h" />
@@ -145,6 +148,7 @@
     <ClInclude Include="moonlight-common-c\src\RtpReorderQueue.h" />
     <ClInclude Include="moonlight-common-c\src\Rtsp.h" />
     <ClInclude Include="moonlight-common-c\src\Video.h" />
+    <ClInclude Include="MoonlightCommonInterop.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9979e71e-4143-477e-b586-c7a49f078624}</ProjectGuid>

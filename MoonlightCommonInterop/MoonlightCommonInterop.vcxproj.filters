@@ -103,6 +103,7 @@
     <ClCompile Include="moonlight-common-c\src\VideoStream.c">
       <Filter>moonlight-common-c</Filter>
     </ClCompile>
+    <ClCompile Include="MoonlightCommonInterop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="moonlight-common-c\reedsolomon\rs.h">
@@ -174,5 +175,8 @@
     <ClInclude Include="moonlight-common-c\src\Video.h">
       <Filter>moonlight-common-c</Filter>
     </ClInclude>
+    <ClInclude Include="IAudioRenderer.h" />
+    <ClInclude Include="IVideoRenderer.h" />
+    <ClInclude Include="MoonlightCommonInterop.h" />
   </ItemGroup>
 </Project>
