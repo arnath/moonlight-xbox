@@ -1,3 +1,4 @@
+#include <stdarg.h>
 #include <string>
 #include <opus_multistream.h>
 #include "Limelight.h"
@@ -6,19 +7,26 @@
 using namespace Platform;
 using namespace Moonlight::Xbox::Interop;
 
-static IVideoRenderer^ g_VideoRenderer;
-static IAudioRenderer^ g_AudioRenderer;
-static IConnectionListener^ g_ConnectionListener;
+static IVideoRenderer^ s_VideoRenderer;
+static IAudioRenderer^ s_AudioRenderer;
+static IConnectionListener^ s_ConnectionListener;
 
 #define INITIAL_FRAME_BUFFER_SIZE 32768
-static int g_VideoFrameBufferSize = 0;
-static char* g_VideoFrameBuffer = NULL;
+static int s_VideoFrameBufferSize = 0;
+static char* s_VideoFrameBuffer = NULL;
 
 #define PCM_FRAME_SIZE 240
 #define CHANNEL_COUNT 2
-static int g_AudioFrameBufferSize = 0;
-static char* g_AudioFrameBuffer = NULL;
-static OpusMSDecoder* g_OpusDecoder = NULL;
+static int s_AudioFrameBufferSize = 0;
+static char* s_AudioFrameBuffer = NULL;
+static OpusMSDecoder* s_OpusDecoder = NULL;
+
+inline String^ CStringToPlatformString(const char* string)
+{
+	std::string stdString = std::string(string);
+	std::wstring wString = std::wstring(stdString.begin(), stdString.end());
+	return ref new String(wString.c_str());
+}
 
 int DrSetup(
 	int videoFormat,
@@ -28,29 +36,29 @@ int DrSetup(
 	void* context,
 	int drFlags)
 {
-	return g_VideoRenderer->Initialize(videoFormat, width, height, redrawRate);
+	return s_VideoRenderer->Initialize(videoFormat, width, height, redrawRate);
 }
 
 void DrStart()
 {
-	g_VideoRenderer->Start();
+	s_VideoRenderer->Start();
 }
 
 void DrStop()
 {
-	g_VideoRenderer->Stop();
+	s_VideoRenderer->Stop();
 }
 
 void DrCleanup()
 {
-	if (g_VideoFrameBuffer != NULL)
+	if (s_VideoFrameBuffer != NULL)
 	{
-		free(g_VideoFrameBuffer);
-		g_VideoFrameBuffer = NULL;
-		g_VideoFrameBufferSize = 0;
+		free(s_VideoFrameBuffer);
+		s_VideoFrameBuffer = NULL;
+		s_VideoFrameBufferSize = 0;
 	}
 
-	g_VideoRenderer->Cleanup();
+	s_VideoRenderer->Cleanup();
 }
 
 int DrSubmitDecodeUnit(PDECODE_UNIT decodeUnit)
@@ -58,15 +66,15 @@ int DrSubmitDecodeUnit(PDECODE_UNIT decodeUnit)
 	// Resize the frame buffer if the current frame is too big.
 	// This is safe without locking because this function is
 	// called only from a single thread.
-	if (g_VideoFrameBufferSize < decodeUnit->fullLength)
+	if (s_VideoFrameBufferSize < decodeUnit->fullLength)
 	{
-		g_VideoFrameBufferSize = decodeUnit->fullLength;
-		g_VideoFrameBuffer = (char*)malloc(g_VideoFrameBufferSize);
+		s_VideoFrameBufferSize = decodeUnit->fullLength;
+		s_VideoFrameBuffer = (char*)malloc(s_VideoFrameBufferSize);
 	}
 
-	if (g_VideoFrameBuffer == NULL)
+	if (s_VideoFrameBuffer == NULL)
 	{
-		g_VideoFrameBufferSize = 0;
+		s_VideoFrameBufferSize = 0;
 		return DR_NEED_IDR;
 	}
 
@@ -79,11 +87,11 @@ int DrSubmitDecodeUnit(PDECODE_UNIT decodeUnit)
 		{
 			// Use the beginning of the buffer each time since this is a separate
 			// invocation of the decoder each time.
-			memcpy(&g_VideoFrameBuffer[0], currentEntry->data, currentEntry->length);
+			memcpy(&s_VideoFrameBuffer[0], currentEntry->data, currentEntry->length);
 
 			int ret =
-				g_VideoRenderer->HandleFrame(
-					ArrayReference<unsigned char>((unsigned char*)g_VideoFrameBuffer, currentEntry->length),
+				s_VideoRenderer->HandleFrame(
+					ArrayReference<unsigned char>((unsigned char*)s_VideoFrameBuffer, currentEntry->length),
 					currentEntry->bufferType,
 					decodeUnit->frameNumber,
 					decodeUnit->receiveTimeMs);
@@ -94,15 +102,15 @@ int DrSubmitDecodeUnit(PDECODE_UNIT decodeUnit)
 		}
 		else
 		{
-			memcpy(&g_VideoFrameBuffer[offset], currentEntry->data, currentEntry->length);
+			memcpy(&s_VideoFrameBuffer[offset], currentEntry->data, currentEntry->length);
 			offset += currentEntry->length;
 			currentEntry = currentEntry->next;
 		}
 	}
 
 	return
-		g_VideoRenderer->HandleFrame(
-			ArrayReference<unsigned char>((unsigned char*)g_VideoFrameBuffer, offset),
+		s_VideoRenderer->HandleFrame(
+			ArrayReference<unsigned char>((unsigned char*)s_VideoFrameBuffer, offset),
 			BUFFER_TYPE_PICDATA,
 			decodeUnit->frameNumber,
 			decodeUnit->receiveTimeMs);
@@ -114,13 +122,13 @@ int ArInit(
 	void* context,
 	int arFlags)
 {
-	int err = g_AudioRenderer->Initialize(audioConfiguration);
+	int err = s_AudioRenderer->Initialize(audioConfiguration);
 	if (err != 0)
 	{
 		return err;
 	}
 
-	g_OpusDecoder =
+	s_OpusDecoder =
 		opus_multistream_decoder_create(
 			opusConfig->sampleRate,
 			opusConfig->channelCount,
@@ -128,61 +136,110 @@ int ArInit(
 			opusConfig->coupledStreams,
 			opusConfig->mapping,
 			&err);
-	if (g_OpusDecoder == NULL)
+	if (s_OpusDecoder == NULL)
 	{
 		ArCleanup();
 		return -1;
 	}
 
 	// We know ahead of time what the buffer size will be for decoded audio, so pre-allocate it
-	g_AudioFrameBufferSize = opusConfig->channelCount * PCM_FRAME_SIZE * sizeof(opus_int16);
-	g_AudioFrameBuffer = (char *)malloc(g_AudioFrameBufferSize);
+	s_AudioFrameBufferSize = opusConfig->channelCount * PCM_FRAME_SIZE * sizeof(opus_int16);
+	s_AudioFrameBuffer = (char *)malloc(s_AudioFrameBufferSize);
 
 	return err;
 }
 
 void ArStart()
 {
-	g_AudioRenderer->Start();
+	s_AudioRenderer->Start();
 }
 
 void ArStop()
 {
-	g_AudioRenderer->Stop();
+	s_AudioRenderer->Stop();
 }
 
 void ArCleanup()
 {
-	if (g_OpusDecoder != NULL)
+	if (s_OpusDecoder != NULL)
 	{
-		opus_multistream_decoder_destroy(g_OpusDecoder);
-		g_OpusDecoder = NULL;
+		opus_multistream_decoder_destroy(s_OpusDecoder);
+		s_OpusDecoder = NULL;
 	}
 
-	if (g_AudioFrameBuffer != NULL)
+	if (s_AudioFrameBuffer != NULL)
 	{
-		free(g_AudioFrameBuffer);
-		g_AudioFrameBuffer = NULL;
-		g_AudioFrameBufferSize = 0;
+		free(s_AudioFrameBuffer);
+		s_AudioFrameBuffer = NULL;
+		s_AudioFrameBufferSize = 0;
 	}
 
-	g_AudioRenderer->Cleanup();
+	s_AudioRenderer->Cleanup();
 }
 
 void ArDecodeAndPlaySample(char *sampleData, int sampleLength)
 {
 	int decodeLen =
 		opus_multistream_decode(
-			g_OpusDecoder,
+			s_OpusDecoder,
 			(const unsigned char*)sampleData,
 			sampleLength,
-			(opus_int16*)g_AudioFrameBuffer,
+			(opus_int16*)s_AudioFrameBuffer,
 			PCM_FRAME_SIZE,
 			0);
 	if (decodeLen > 0)
 	{
-		g_AudioRenderer->HandleFrame(ArrayReference<unsigned char>((unsigned char *)g_AudioFrameBuffer, g_AudioFrameBufferSize));
+		s_AudioRenderer->HandleFrame(ArrayReference<unsigned char>((unsigned char *)s_AudioFrameBuffer, s_AudioFrameBufferSize));
 	}
+}
+
+void ClStageStarting(int stage)
+{
+	String^ stageName = CStringToPlatformString(LiGetStageName(stage));
+	s_ConnectionListener->StageStarting(stageName);
+}
+
+void ClStageComplete(int stage)
+{
+	String^ stageName = CStringToPlatformString(LiGetStageName(stage));
+	s_ConnectionListener->StageComplete(stageName);
+}
+
+void ClStageFailed(int stage, long errorCode)
+{
+	String^ stageName = CStringToPlatformString(LiGetStageName(stage));
+	s_ConnectionListener->StageFailed(stageName, errorCode);
+}
+
+void ClConnectionStarted()
+{
+	s_ConnectionListener->ConnectionStarted();
+}
+
+void ClConnectionTerminated(long errorCode)
+{
+	s_ConnectionListener->ConnectionTerminated(errorCode);
+}
+
+void ClDisplayMessage(const char* message)
+{
+	s_ConnectionListener->DisplayMessage(CStringToPlatformString(message));
+}
+
+void ClDisplayTransientMessage(const char* message)
+{
+	s_ConnectionListener->DisplayTransientMessage(CStringToPlatformString(message));
+}
+
+void ClLogMessage(const char* format, ...)
+{
+	char message[1024];
+	va_list va;
+	va_start(va, format);
+	vsnprintf(message, 1024, format, va);
+	va_end(va);
+
+	s_ConnectionListener->LogMessage(CStringToPlatformString(message));
 }
 
 int MoonlightCommonInterop::StartConnection(
@@ -190,8 +247,9 @@ int MoonlightCommonInterop::StartConnection(
 	IAudioRenderer^ audioRenderer,
 	IConnectionListener^ connectionListener)
 {
-	g_VideoRenderer = videoRenderer;
-	g_AudioRenderer = audioRenderer;
+	s_VideoRenderer = videoRenderer;
+	s_AudioRenderer = audioRenderer;
+	s_ConnectionListener = connectionListener;
 
 	return 0;
 }
