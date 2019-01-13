@@ -7,6 +7,26 @@
 using namespace Platform;
 using namespace Moonlight::Xbox::Interop;
 
+// C callback declarations
+static int DrSetup(int videoFormat, int width, int height, int redrawRate, void* context, int drFlags);
+static void DrStart();
+static void DrStop();
+static void DrCleanup();
+static int DrSubmitDecodeUnit(PDECODE_UNIT decodeUnit);
+static int ArInit(int audioConfiguration, const POPUS_MULTISTREAM_CONFIGURATION opusConfig, void* context, int arFlags);
+static void ArStart();
+static void ArStop();
+static void ArCleanup();
+static void ArDecodeAndPlaySample(char *sampleData, int sampleLength);
+static void ClStageStarting(int stage);
+static void ClStageComplete(int stage);
+static void ClStageFailed(int stage, long errorCode);
+static void ClConnectionStarted();
+static void ClConnectionTerminated(long errorCode);
+static void ClDisplayMessage(const char* message);
+static void ClDisplayTransientMessage(const char* message);
+static void ClLogMessage(const char* format, ...);
+
 static IVideoRenderer^ s_VideoRenderer;
 static IAudioRenderer^ s_AudioRenderer;
 static IConnectionListener^ s_ConnectionListener;

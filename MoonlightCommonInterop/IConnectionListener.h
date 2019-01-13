@@ -1,15 +1,5 @@
 #pragma once
 
-// C callback declarations
-void ClStageStarting(int stage);
-void ClStageComplete(int stage);
-void ClStageFailed(int stage, long errorCode);
-void ClConnectionStarted();
-void ClConnectionTerminated(long errorCode);
-void ClDisplayMessage(const char* message);
-void ClDisplayTransientMessage(const char* message);
-void ClLogMessage(const char* format, ...);
-
 namespace Moonlight
 {
 	namespace Xbox
