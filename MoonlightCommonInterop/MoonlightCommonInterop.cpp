@@ -2,10 +2,13 @@
 #include <opus_multistream.h>
 #include "Limelight.h"
 #include "MoonlightCommonInterop.h"
-#include "IVideoRenderer.h"
 
 using namespace Platform;
-using namespace Moonlight::Xbox::Binding;
+using namespace Moonlight::Xbox::Interop;
+
+static IVideoRenderer^ g_VideoRenderer;
+static IAudioRenderer^ g_AudioRenderer;
+static IConnectionListener^ g_ConnectionListener;
 
 #define INITIAL_FRAME_BUFFER_SIZE 32768
 static int g_VideoFrameBufferSize = 0;
@@ -17,7 +20,7 @@ static int g_AudioFrameBufferSize = 0;
 static char* g_AudioFrameBuffer = NULL;
 static OpusMSDecoder* g_OpusDecoder = NULL;
 
-int MoonlightCommonInterop::DrSetup(
+int DrSetup(
 	int videoFormat,
 	int width,
 	int height,
@@ -25,20 +28,20 @@ int MoonlightCommonInterop::DrSetup(
 	void* context,
 	int drFlags)
 {
-	return _videoRenderer->Initialize(videoFormat, width, height, redrawRate);
+	return g_VideoRenderer->Initialize(videoFormat, width, height, redrawRate);
 }
 
-void MoonlightCommonInterop::DrStart()
+void DrStart()
 {
-	_videoRenderer->Start();
+	g_VideoRenderer->Start();
 }
 
-void MoonlightCommonInterop::DrStop()
+void DrStop()
 {
-	_videoRenderer->Stop();
+	g_VideoRenderer->Stop();
 }
 
-void MoonlightCommonInterop::DrCleanup()
+void DrCleanup()
 {
 	if (g_VideoFrameBuffer != NULL)
 	{
@@ -47,10 +50,10 @@ void MoonlightCommonInterop::DrCleanup()
 		g_VideoFrameBufferSize = 0;
 	}
 
-	_videoRenderer->Cleanup();
+	g_VideoRenderer->Cleanup();
 }
 
-int MoonlightCommonInterop::DrSubmitDecodeUnit(PDECODE_UNIT decodeUnit)
+int DrSubmitDecodeUnit(PDECODE_UNIT decodeUnit)
 {
 	// Resize the frame buffer if the current frame is too big.
 	// This is safe without locking because this function is
@@ -79,7 +82,7 @@ int MoonlightCommonInterop::DrSubmitDecodeUnit(PDECODE_UNIT decodeUnit)
 			memcpy(&g_VideoFrameBuffer[0], currentEntry->data, currentEntry->length);
 
 			int ret =
-				_videoRenderer->HandleFrame(
+				g_VideoRenderer->HandleFrame(
 					ArrayReference<unsigned char>((unsigned char*)g_VideoFrameBuffer, currentEntry->length),
 					currentEntry->bufferType,
 					decodeUnit->frameNumber,
@@ -98,20 +101,20 @@ int MoonlightCommonInterop::DrSubmitDecodeUnit(PDECODE_UNIT decodeUnit)
 	}
 
 	return
-		_videoRenderer->HandleFrame(
+		g_VideoRenderer->HandleFrame(
 			ArrayReference<unsigned char>((unsigned char*)g_VideoFrameBuffer, offset),
 			BUFFER_TYPE_PICDATA,
 			decodeUnit->frameNumber,
 			decodeUnit->receiveTimeMs);
 }
 
-int MoonlightCommonInterop::ArInit(
+int ArInit(
 	int audioConfiguration,
 	const POPUS_MULTISTREAM_CONFIGURATION opusConfig,
 	void* context,
 	int arFlags)
 {
-	int err = _audioRenderer->Initialize(audioConfiguration);
+	int err = g_AudioRenderer->Initialize(audioConfiguration);
 	if (err != 0)
 	{
 		return err;
@@ -138,17 +141,17 @@ int MoonlightCommonInterop::ArInit(
 	return err;
 }
 
-void MoonlightCommonInterop::ArStart()
+void ArStart()
 {
-	_audioRenderer->Start();
+	g_AudioRenderer->Start();
 }
 
-void MoonlightCommonInterop::ArStop()
+void ArStop()
 {
-	_audioRenderer->Stop();
+	g_AudioRenderer->Stop();
 }
 
-void MoonlightCommonInterop::ArCleanup()
+void ArCleanup()
 {
 	if (g_OpusDecoder != NULL)
 	{
@@ -163,10 +166,10 @@ void MoonlightCommonInterop::ArCleanup()
 		g_AudioFrameBufferSize = 0;
 	}
 
-	_audioRenderer->Cleanup();
+	g_AudioRenderer->Cleanup();
 }
 
-void MoonlightCommonInterop::ArDecodeAndPlaySample(char *sampleData, int sampleLength)
+void ArDecodeAndPlaySample(char *sampleData, int sampleLength)
 {
 	int decodeLen =
 		opus_multistream_decode(
@@ -178,19 +181,17 @@ void MoonlightCommonInterop::ArDecodeAndPlaySample(char *sampleData, int sampleL
 			0);
 	if (decodeLen > 0)
 	{
-		_audioRenderer->HandleFrame(ArrayReference<unsigned char>((unsigned char *)g_AudioFrameBuffer, g_AudioFrameBufferSize));
+		g_AudioRenderer->HandleFrame(ArrayReference<unsigned char>((unsigned char *)g_AudioFrameBuffer, g_AudioFrameBufferSize));
 	}
 }
 
-MoonlightCommonInterop::MoonlightCommonInterop(
+int MoonlightCommonInterop::StartConnection(
 	IVideoRenderer^ videoRenderer,
-	IAudioRenderer^ audioRenderer)
+	IAudioRenderer^ audioRenderer,
+	IConnectionListener^ connectionListener)
 {
-	_videoRenderer = videoRenderer;
-	_audioRenderer = audioRenderer;
-}
+	g_VideoRenderer = videoRenderer;
+	g_AudioRenderer = audioRenderer;
 
-int MoonlightCommonInterop::StartConnection()
-{
 	return 0;
 }

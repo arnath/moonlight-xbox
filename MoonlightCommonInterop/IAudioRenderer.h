@@ -4,7 +4,7 @@ namespace Moonlight
 {
 	namespace Xbox
 	{
-		namespace Binding
+		namespace Interop
 		{
 			using namespace Platform;
 

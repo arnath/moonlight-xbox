@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IAudioRenderer.h" />
+    <ClInclude Include="IConnectionListener.h" />
     <ClInclude Include="IVideoRenderer.h" />
     <ClInclude Include="moonlight-common-c\enet\include\enet\callbacks.h" />
     <ClInclude Include="moonlight-common-c\enet\include\enet\enet.h" />
