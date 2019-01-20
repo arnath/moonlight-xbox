@@ -10,6 +10,8 @@ namespace Moonlight
 
 			public interface class IAudioRenderer
 			{
+				property int Capabilities;
+
 				int Initialize(int audioFormat);
 
 				void Start();

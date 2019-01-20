@@ -10,6 +10,8 @@ namespace Moonlight
 
 			public interface class IVideoRenderer
 			{
+				property int Capabilities;
+
 				int Initialize(int videoFormat, int width, int height, int redrawRate);
 
 				void Start();

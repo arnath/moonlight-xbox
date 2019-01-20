@@ -48,6 +48,13 @@ inline String^ CStringToPlatformString(const char* string)
 	return ref new String(wString.c_str());
 }
 
+inline const char* PlatformStringToCString(String^ string)
+{
+	std::wstring wString(string->Begin());
+	std::string stdString(wString.begin(), wString.end());
+	return stdString.c_str();
+}
+
 int DrSetup(
 	int videoFormat,
 	int width,
@@ -263,6 +270,10 @@ void ClLogMessage(const char* format, ...)
 }
 
 int MoonlightCommonInterop::StartConnection(
+	String^ address,
+	String^ appVersion,
+	String^ gfeVersion,
+	StreamConfiguration^ streamConfiguration,
 	IVideoRenderer^ videoRenderer,
 	IAudioRenderer^ audioRenderer,
 	IConnectionListener^ connectionListener)
@@ -271,5 +282,73 @@ int MoonlightCommonInterop::StartConnection(
 	s_AudioRenderer = audioRenderer;
 	s_ConnectionListener = connectionListener;
 
-	return 0;
+	SERVER_INFORMATION interopServerInformation;
+	LiInitializeServerInformation(&interopServerInformation);
+	interopServerInformation.address = PlatformStringToCString(address);
+	interopServerInformation.serverInfoAppVersion = PlatformStringToCString(appVersion);
+	interopServerInformation.serverInfoGfeVersion = PlatformStringToCString(gfeVersion);
+	
+	STREAM_CONFIGURATION interopStreamConfiguration;
+	LiInitializeStreamConfiguration(&interopStreamConfiguration);
+	interopStreamConfiguration.width = streamConfiguration->Width;
+	interopStreamConfiguration.height = streamConfiguration->Height;
+	interopStreamConfiguration.fps = streamConfiguration->Fps;
+	interopStreamConfiguration.bitrate = streamConfiguration->Bitrate;
+	interopStreamConfiguration.packetSize = streamConfiguration->PacketSize;
+	interopStreamConfiguration.streamingRemotely = streamConfiguration->StreamingRemotely;
+	interopStreamConfiguration.audioConfiguration = streamConfiguration->AudioConfiguration;
+	interopStreamConfiguration.supportsHevc = streamConfiguration->SupportsHevc;
+	interopStreamConfiguration.enableHdr = streamConfiguration->EnableHdr;
+	interopStreamConfiguration.hevcBitratePercentageMultiplier = streamConfiguration->HevcBitratePercentageMultiplier;
+	interopStreamConfiguration.clientRefreshRateX100 = streamConfiguration->ClientRefreshRateX100;
+	memcpy_s(
+		interopStreamConfiguration.remoteInputAesKey,
+		sizeof(interopStreamConfiguration.remoteInputAesKey),
+		streamConfiguration->RemoteInputAesKey->Data,
+		streamConfiguration->RemoteInputAesKey->Length);
+	memcpy_s(
+		interopStreamConfiguration.remoteInputAesKey,
+		sizeof(interopStreamConfiguration.remoteInputAesKey),
+		streamConfiguration->RemoteInputAesKey->Data,
+		streamConfiguration->RemoteInputAesKey->Length);
+
+	DECODER_RENDERER_CALLBACKS interopVideoRendererCallbacks;
+	LiInitializeVideoCallbacks(&interopVideoRendererCallbacks);
+	interopVideoRendererCallbacks.setup = DrSetup;
+	interopVideoRendererCallbacks.start = DrStart;
+	interopVideoRendererCallbacks.stop = DrStop;
+	interopVideoRendererCallbacks.cleanup = DrCleanup;
+	interopVideoRendererCallbacks.submitDecodeUnit = DrSubmitDecodeUnit;
+	interopVideoRendererCallbacks.capabilities = s_VideoRenderer->Capabilities;
+
+	AUDIO_RENDERER_CALLBACKS interopAudioRendererCallbacks;
+	LiInitializeAudioCallbacks(&interopAudioRendererCallbacks);
+	interopAudioRendererCallbacks.init = ArInit;
+	interopAudioRendererCallbacks.start = ArStart;
+	interopAudioRendererCallbacks.stop = ArStop;
+	interopAudioRendererCallbacks.cleanup = ArCleanup;
+	interopAudioRendererCallbacks.decodeAndPlaySample = ArDecodeAndPlaySample;
+	interopAudioRendererCallbacks.capabilities = s_AudioRenderer->Capabilities;
+
+	CONNECTION_LISTENER_CALLBACKS interopConnectionListenerCallbacks;
+	LiInitializeConnectionCallbacks(&interopConnectionListenerCallbacks);
+	interopConnectionListenerCallbacks.stageStarting = ClStageStarting;
+	interopConnectionListenerCallbacks.stageComplete = ClStageComplete;
+	interopConnectionListenerCallbacks.stageFailed = ClStageFailed;
+	interopConnectionListenerCallbacks.connectionStarted = ClConnectionStarted;
+	interopConnectionListenerCallbacks.connectionTerminated = ClConnectionTerminated;
+	interopConnectionListenerCallbacks.displayMessage = ClDisplayMessage;
+	interopConnectionListenerCallbacks.displayTransientMessage = ClDisplayTransientMessage;
+	interopConnectionListenerCallbacks.logMessage = ClLogMessage;
+
+	return LiStartConnection(
+		&interopServerInformation,
+		&interopStreamConfiguration,
+		&interopConnectionListenerCallbacks,
+		&interopVideoRendererCallbacks,
+		&interopAudioRendererCallbacks,
+		NULL,
+		0,
+		NULL,
+		0);
 }

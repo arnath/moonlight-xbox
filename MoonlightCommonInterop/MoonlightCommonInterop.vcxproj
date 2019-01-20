@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|ARM">
@@ -150,6 +150,7 @@
     <ClInclude Include="moonlight-common-c\src\Rtsp.h" />
     <ClInclude Include="moonlight-common-c\src\Video.h" />
     <ClInclude Include="MoonlightCommonInterop.h" />
+    <ClInclude Include="StreamConfiguration.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9979e71e-4143-477e-b586-c7a49f078624}</ProjectGuid>

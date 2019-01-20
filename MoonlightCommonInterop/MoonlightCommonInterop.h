@@ -3,6 +3,7 @@
 #include "IVideoRenderer.h"
 #include "IAudioRenderer.h"
 #include "IConnectionListener.h"
+#include "StreamConfiguration.h"
 
 namespace Moonlight
 {
@@ -14,6 +15,10 @@ namespace Moonlight
 			{
 			public:
 				int StartConnection(
+					String^ address,
+					String^ appVersion,
+					String^ gfeVersion,
+					StreamConfiguration^ streamConfiguration,
 					IVideoRenderer^ videoRenderer,
 					IAudioRenderer^ audioRenderer,
 					IConnectionListener^ connectionListener);

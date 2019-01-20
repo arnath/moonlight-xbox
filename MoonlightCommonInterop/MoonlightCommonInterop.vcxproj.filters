@@ -179,5 +179,6 @@
     <ClInclude Include="IVideoRenderer.h" />
     <ClInclude Include="MoonlightCommonInterop.h" />
     <ClInclude Include="IConnectionListener.h" />
+    <ClInclude Include="StreamConfiguration.h" />
   </ItemGroup>
 </Project>
