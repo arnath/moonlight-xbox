@@ -1,13 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|ARM">
       <Configuration>Debug</Configuration>
       <Platform>ARM</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|ARM64">
-      <Configuration>Debug</Configuration>
-      <Platform>ARM64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -21,10 +17,6 @@
       <Configuration>Release</Configuration>
       <Platform>ARM</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|ARM64">
-      <Configuration>Release</Configuration>
-      <Platform>ARM64</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
@@ -33,6 +25,132 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="moonlight-common-c\enet\callbacks.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\enet\compress.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\enet\host.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\enet\list.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\enet\packet.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\enet\peer.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\enet\protocol.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\enet\unix.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\enet\vita.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\enet\win32.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\reedsolomon\rs.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\AudioStream.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\ByteBuffer.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\Connection.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <SDLCheck>false</SDLCheck>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\ControlStream.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\FakeCallbacks.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\InputStream.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\LinkedBlockingQueue.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\Misc.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <SDLCheck>false</SDLCheck>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\Platform.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\PlatformSockets.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <SDLCheck>false</SDLCheck>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\RtpFecQueue.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\RtpReorderQueue.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\RtspConnection.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <SDLCheck>false</SDLCheck>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\RtspParser.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <SDLCheck>false</SDLCheck>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\SdpGenerator.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <SDLCheck>false</SDLCheck>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\SimpleStun.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\VideoDepacketizer.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="moonlight-common-c\src\VideoStream.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="MoonlightCommonInterop.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IAudioRenderer.h" />
+    <ClInclude Include="IConnectionListener.h" />
+    <ClInclude Include="IVideoRenderer.h" />
+    <ClInclude Include="moonlight-common-c\enet\include\enet\callbacks.h" />
+    <ClInclude Include="moonlight-common-c\enet\include\enet\enet.h" />
+    <ClInclude Include="moonlight-common-c\enet\include\enet\list.h" />
+    <ClInclude Include="moonlight-common-c\enet\include\enet\protocol.h" />
+    <ClInclude Include="moonlight-common-c\enet\include\enet\time.h" />
+    <ClInclude Include="moonlight-common-c\enet\include\enet\types.h" />
+    <ClInclude Include="moonlight-common-c\enet\include\enet\unix.h" />
+    <ClInclude Include="moonlight-common-c\enet\include\enet\utility.h" />
+    <ClInclude Include="moonlight-common-c\enet\include\enet\vita.h" />
+    <ClInclude Include="moonlight-common-c\enet\include\enet\win32.h" />
+    <ClInclude Include="moonlight-common-c\reedsolomon\rs.h" />
+    <ClInclude Include="moonlight-common-c\src\ByteBuffer.h" />
+    <ClInclude Include="moonlight-common-c\src\Input.h" />
+    <ClInclude Include="moonlight-common-c\src\Limelight-internal.h" />
+    <ClInclude Include="moonlight-common-c\src\Limelight.h" />
+    <ClInclude Include="moonlight-common-c\src\LinkedBlockingQueue.h" />
+    <ClInclude Include="moonlight-common-c\src\Platform.h" />
+    <ClInclude Include="moonlight-common-c\src\PlatformSockets.h" />
+    <ClInclude Include="moonlight-common-c\src\PlatformThreads.h" />
+    <ClInclude Include="moonlight-common-c\src\RtpFecQueue.h" />
+    <ClInclude Include="moonlight-common-c\src\RtpReorderQueue.h" />
+    <ClInclude Include="moonlight-common-c\src\Rtsp.h" />
+    <ClInclude Include="moonlight-common-c\src\Video.h" />
+    <ClInclude Include="MoonlightCommonInterop.h" />
+    <ClInclude Include="StreamConfiguration.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9979e71e-4143-477e-b586-c7a49f078624}</ProjectGuid>
@@ -57,11 +175,6 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -74,12 +187,6 @@
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v141</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -108,12 +215,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -124,31 +225,31 @@
   <PropertyGroup />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <GenerateManifest>false</GenerateManifest>
+    <IncludePath>opus-1.1-static;moonlight-common-c\enet\include;moonlight-common-c\reedsolomon;moonlight-common-c\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <GenerateManifest>false</GenerateManifest>
+    <IncludePath>opus-1.1-static;moonlight-common-c\enet\include;moonlight-common-c\reedsolomon;moonlight-common-c\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <GenerateManifest>false</GenerateManifest>
+    <IncludePath>opus-1.1-static;moonlight-common-c\enet\include;moonlight-common-c\reedsolomon;moonlight-common-c\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <GenerateManifest>false</GenerateManifest>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <GenerateManifest>false</GenerateManifest>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
-    <GenerateManifest>false</GenerateManifest>
+    <IncludePath>opus-1.1-static;moonlight-common-c\enet\include;moonlight-common-c\reedsolomon;moonlight-common-c\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <GenerateManifest>false</GenerateManifest>
+    <IncludePath>opus-1.1-static;moonlight-common-c\enet\include;moonlight-common-c\reedsolomon;moonlight-common-c\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <GenerateManifest>false</GenerateManifest>
+    <IncludePath>opus-1.1-static;moonlight-common-c\enet\include;moonlight-common-c\reedsolomon;moonlight-common-c\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PreprocessorDefinitions>_WINRT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
@@ -159,11 +260,14 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>opus.lib;celt.lib;silk_common.lib;silk_fixed.lib;silk_float.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>opus-1.1-static\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/nodefaultlib:vccorlibd /nodefaultlib:msvcrtd vccorlibd.lib msvcrtd.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PreprocessorDefinitions>_WINRT_DLL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
@@ -174,11 +278,14 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>opus.lib;celt.lib;silk_common.lib;silk_fixed.lib;silk_float.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>opus-1.1-static\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/nodefaultlib:vccorlib /nodefaultlib:msvcrt vccorlib.lib msvcrt.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PreprocessorDefinitions>_WINRT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
@@ -189,11 +296,14 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>opus.lib;celt.lib;silk_common.lib;silk_fixed.lib;silk_float.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>opus-1.1-static\ARM;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/nodefaultlib:vccorlibd /nodefaultlib:msvcrtd vccorlibd.lib msvcrtd.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PreprocessorDefinitions>_WINRT_DLL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
@@ -204,41 +314,14 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
-      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
-      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
-    <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
-      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
-      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>opus.lib;celt.lib;silk_common.lib;silk_fixed.lib;silk_float.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>opus-1.1-static\ARM;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/nodefaultlib:vccorlib /nodefaultlib:msvcrt vccorlib.lib msvcrt.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PreprocessorDefinitions>_WINRT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
@@ -249,11 +332,14 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>opus.lib;celt.lib;silk_common.lib;silk_fixed.lib;silk_float.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>opus-1.1-static\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/nodefaultlib:vccorlibd /nodefaultlib:msvcrtd vccorlibd.lib msvcrtd.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PreprocessorDefinitions>_WINRT_DLL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
@@ -264,6 +350,9 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>opus.lib;celt.lib;silk_common.lib;silk_fixed.lib;silk_float.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>opus-1.1-static\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/nodefaultlib:vccorlib /nodefaultlib:msvcrt vccorlib.lib msvcrt.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

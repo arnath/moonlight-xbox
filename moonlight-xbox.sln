@@ -8,27 +8,21 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
-		Debug|ARM64 = Debug|ARM64
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
 		Release|ARM = Release|ARM
-		Release|ARM64 = Release|ARM64
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9979E71E-4143-477E-B586-C7A49F078624}.Debug|ARM.ActiveCfg = Debug|ARM
 		{9979E71E-4143-477E-B586-C7A49F078624}.Debug|ARM.Build.0 = Debug|ARM
-		{9979E71E-4143-477E-B586-C7A49F078624}.Debug|ARM64.ActiveCfg = Debug|ARM64
-		{9979E71E-4143-477E-B586-C7A49F078624}.Debug|ARM64.Build.0 = Debug|ARM64
 		{9979E71E-4143-477E-B586-C7A49F078624}.Debug|x64.ActiveCfg = Debug|x64
 		{9979E71E-4143-477E-B586-C7A49F078624}.Debug|x64.Build.0 = Debug|x64
 		{9979E71E-4143-477E-B586-C7A49F078624}.Debug|x86.ActiveCfg = Debug|Win32
 		{9979E71E-4143-477E-B586-C7A49F078624}.Debug|x86.Build.0 = Debug|Win32
 		{9979E71E-4143-477E-B586-C7A49F078624}.Release|ARM.ActiveCfg = Release|ARM
 		{9979E71E-4143-477E-B586-C7A49F078624}.Release|ARM.Build.0 = Release|ARM
-		{9979E71E-4143-477E-B586-C7A49F078624}.Release|ARM64.ActiveCfg = Release|ARM64
-		{9979E71E-4143-477E-B586-C7A49F078624}.Release|ARM64.Build.0 = Release|ARM64
 		{9979E71E-4143-477E-B586-C7A49F078624}.Release|x64.ActiveCfg = Release|x64
 		{9979E71E-4143-477E-B586-C7A49F078624}.Release|x64.Build.0 = Release|x64
 		{9979E71E-4143-477E-B586-C7A49F078624}.Release|x86.ActiveCfg = Release|Win32
